@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Room Order API
+  description: API for managing room orders in the system.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8016'
+    description: Local Development Server
+paths:
+  /api/room_order:
+    get:
+      summary: Get a list of all room orders
+      description: Retrieve all room orders in the system.
+      operationId: getRoomOrders
+      tags:
+        - Room Orders
+      responses:
+        '200':
+          description: A list of room orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        no_order:
+                          type: string
+                        order_date:
+                          type: string
+                          format: date
+                        room:
+                          type: string
+                        state:
+                          type: string
+        '500':
+          description: Internal server error
+
+  /api/room_order/room/{room_id}:
+    get:
+      summary: Get room orders by room ID
+      description: Retrieve room orders filtered by room ID.
+      operationId: getRoomOrdersByRoom
+      tags:
+        - Room Orders
+      parameters:
+        - name: room_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the room to filter the orders by.
+      responses:
+        '200':
+          description: A list of room orders for the given room ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        no_order:
+                          type: string
+                        order_date:
+                          type: string
+                          format: date
+                        room:
+                          type: string
+                        state:
+                          type: string
+        '404':
+          description: Order not found for the given room ID
+        '500':
+          description: Internal server error
+
+  /api/room_order/order_name/{order_name}:
+    get:
+      summary: Get room orders by order name
+      description: Retrieve room orders filtered by order name.
+      operationId: getRoomOrdersByOrderName
+      tags:
+        - Room Orders
+      parameters:
+        - name: order_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the order to filter the orders by.
+      responses:
+        '200':
+          description: A list of room orders for the given order name
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        no_order:
+                          type: string
+                        order_date:
+                          type: string
+                          format: date
+                        room:
+                          type: string
+                        state:
+                          type: string
+        '404':
+          description: Order not found for the given order name
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    RoomOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+        no_order:
+          type: string
+        order_date:
+          type: string
+          format: date
+        room:
+          type: string
+        state:
+          type: string

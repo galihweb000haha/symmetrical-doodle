@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_menu_item_room" model="ir.actions.act_window">
+      <field name="name">Master Ruangan</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">room</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_menu_item_room_order" model="ir.actions.act_window">
+      <field name="name">Pemesanan Ruangan</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">room.order</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_item_room_root"
+            name="Room Order"
+            sequence="10"
+            web_icon="tes_custom,static/description/icon.png"/>
+    
+    <menuitem id="menu_item_room" 
+            sequence="1" 
+            name="Master Ruangan" 
+            action="action_menu_item_room"
+            parent="tes_custom.menu_item_room_root" />
+
+    <menuitem id="menu_item_room_order" 
+            sequence="2" 
+            name="Pemesanan Ruangan" 
+            action="action_menu_item_room_order"
+            parent="tes_custom.menu_item_room_root" />
+
+</odoo>
